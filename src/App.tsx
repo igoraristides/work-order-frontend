@@ -7,7 +7,7 @@ import { Box, Typography } from "@mui/material";
 function App() {
   return (
     <div className="App">
-      <HeaderImg title="Smartphone Fix" subTitle="cum on us"></HeaderImg>
+      <HeaderImg></HeaderImg>
       <Box>
         <Typography variant="h4" p={4} align="center">
           Criar Ordem de Serviço
