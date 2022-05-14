@@ -3,6 +3,7 @@ import React from "react";
 import UserRegistration from "./pages/UserRegistration";
 import { HeaderImg } from "./components/HeaderImg";
 import { Box, Typography } from "@mui/material";
+import EquipamentsRegistration from "./pages/EquipamentsRegistration";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           Criar Ordem de Serviço
         </Typography>
         <UserRegistration />
+        <EquipamentsRegistration />
       </Box>
     </div>
   );
