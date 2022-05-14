@@ -83,7 +83,7 @@ const EquipamentsRegistration = () => {
                   id="marca"
                   margin="normal"
                   value={x.marca}
-                  placeholder="ex. Samsumg"
+                  placeholder="ex.: Samsumg"
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
@@ -109,6 +109,7 @@ const EquipamentsRegistration = () => {
                   label="Modelo"
                   id="modelo"
                   margin="normal"
+                  placeholder="ex.: SM-A107M/32DL"
                   value={x.modelo}
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{

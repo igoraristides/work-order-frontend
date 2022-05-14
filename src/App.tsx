@@ -13,7 +13,6 @@ function App() {
         <Typography variant="h4" p={4} align="center">
           Criar Ordem de Serviço
         </Typography>
-        <UserRegistration />
         <EquipamentsRegistration />
       </Box>
     </div>
