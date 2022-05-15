@@ -5,7 +5,7 @@ import UserRegistrationForm from "../components/UserRegistrationForm";
 const UserRegistration = () => {
   return (
     <>
-      <Typography variant="h5" align="center">
+      <Typography variant="h5" p={2} align="center">
         Cliente
       </Typography>
       <Box
