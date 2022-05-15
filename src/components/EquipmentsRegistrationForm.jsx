@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 
 const EquipamentsRegistration = () => {
   const [inputList, setInputList] = useState([
@@ -50,9 +50,6 @@ const EquipamentsRegistration = () => {
 
   return (
     <>
-      <Typography variant="h6" p={2} align="center">
-        Equipamentos
-      </Typography>
       <Box
         component="form"
         sx={{
