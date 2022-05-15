@@ -64,24 +64,26 @@ const EquipamentsRegistration = () => {
               flexWrap="wrap"
               alignItems="center"
             >
-              <Box width="33%">
+              <Box>
                 <TextField
                   disabled
                   label="# Ordem de Serviço"
                   id="osNumber"
                   margin="normal"
+                  width="33%"
                   value={x.osNumber}
                   InputLabelProps={{
                     shrink: true,
                   }}
                 />
               </Box>
-              <Box width="33%">
+              <Box>
                 <TextField
                   required
                   label="Marca"
                   id="marca"
                   margin="normal"
+                  width="33%"
                   value={x.marca}
                   placeholder="ex.: Samsumg"
                   onChange={(e) => handleInputChange(e, i)}
@@ -90,12 +92,13 @@ const EquipamentsRegistration = () => {
                   }}
                 />
               </Box>
-              <Box width="33%">
+              <Box>
                 <TextField
                   required
                   label="Proprietário"
                   id="proprietario"
                   margin="normal"
+                  width="33%"
                   value={x.proprietario}
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
@@ -103,12 +106,13 @@ const EquipamentsRegistration = () => {
                   }}
                 />
               </Box>
-              <Box width="33%">
+              <Box>
                 <TextField
                   required
                   label="Modelo"
                   id="modelo"
                   margin="normal"
+                  width="33%"
                   placeholder="ex.: SM-A107M/32DL"
                   value={x.modelo}
                   onChange={(e) => handleInputChange(e, i)}
@@ -117,11 +121,12 @@ const EquipamentsRegistration = () => {
                   }}
                 />
               </Box>
-              <Box width="33%">
+              <Box>
                 <TextField
                   label="Sistema Operacional"
                   id="sistemaOperacional"
                   margin="normal"
+                  width="33%"
                   value={x.sistemaOperacional}
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
@@ -129,11 +134,12 @@ const EquipamentsRegistration = () => {
                   }}
                 />
               </Box>
-              <Box width="33%">
+              <Box>
                 <TextField
                   label="Cor"
                   id="cor"
                   margin="normal"
+                  width="33%"
                   value={x.cor}
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{

@@ -1,21 +1,27 @@
 import React from "react";
-//import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import UserRegistration from "./pages/UserRegistration";
 import { HeaderImg } from "./components/HeaderImg";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import EquipamentsRegistration from "./pages/EquipamentsRegistration";
 
 function App() {
   return (
-    <div className="App">
-      <HeaderImg></HeaderImg>
-      <Box>
+    <>
+      <Router>
+        <HeaderImg></HeaderImg>
         <Typography variant="h4" p={4} align="center">
           Criar Ordem de Serviço
         </Typography>
-        <EquipamentsRegistration />
-      </Box>
-    </div>
+        <Routes>
+          <Route path="/" element={<UserRegistration />}></Route>
+          <Route
+            path="/equipaments"
+            element={<EquipamentsRegistration />}
+          ></Route>
+        </Routes>
+      </Router>
+    </>
   );
 }
 
