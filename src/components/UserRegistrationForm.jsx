@@ -3,35 +3,40 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 
 const UserRegistrationForm = () => {
   const [client, setClient] = useState({
-    name: undefined,
+    firstName: undefined,
+    lastName: undefined,
+    cpf: undefined,
     phone: undefined,
     cellphone: undefined,
     email: undefined,
-    osNumber: undefined,
   });
 
-  const [nameClient, setNameClient] = useState("");
+  const [firstNameClient, setFirstNameClient] = useState("");
+  const [lastNameClient, setLastNameClient] = useState("");
+  const [cpfClient, setCpfClient] = useState("");
   const [emailClient, setEmailClient] = useState("");
   const [cellphoneClient, setCellphoneClient] = useState("");
   const [phoneClient, setPhoneClient] = useState("");
-  const [osClient, setOsClient] = useState("");
 
   const handeSubmit = (e) => {
     e.preventDefault();
     setClient({
-      name: nameClient,
+      firstName: firstNameClient,
+      lastName: lastNameClient,
       cellphone: cellphoneClient,
       phone: phoneClient,
       email: emailClient,
-      osNumber: osClient,
+      cpf: cpfClient,
     });
 
     console.log(client);
 
-    setNameClient("");
+    setFirstNameClient("");
+    setLastNameClient("");
     setCellphoneClient("");
     setEmailClient("");
     setPhoneClient("");
+    setCpfClient("");
   };
 
   return (
@@ -41,7 +46,6 @@ const UserRegistrationForm = () => {
         sx={{
           "& .MuiTextField-root": { m: 1 },
         }}
-        noValidate
         autoComplete="off"
         onSubmit={handeSubmit}
       >
@@ -49,23 +53,33 @@ const UserRegistrationForm = () => {
           Cliente
         </Typography>
         <TextField
-          disabled
-          label="Número OS"
-          id="osNumber"
+          required
+          id="firstName"
+          label="Primeiro nome"
+          value={firstNameClient}
+          onChange={(e) => setFirstNameClient(e.target.value)}
           margin="normal"
-          value={osClient}
           InputLabelProps={{
             shrink: true,
           }}
         />
         <TextField
           required
-          id="name"
-          label="Nome completo"
-          placeholder="Joao da Silva"
-          value={nameClient}
-          onChange={(e) => setNameClient(e.target.value)}
-          fullWidth
+          id="lastName"
+          label="Ultimo nome"
+          value={lastNameClient}
+          onChange={(e) => setLastNameClient(e.target.value)}
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          required
+          id="cpf"
+          label="CPF"
+          value={cpfClient}
+          onChange={(e) => setCpfClient(e.target.value)}
           margin="normal"
           InputLabelProps={{
             shrink: true,
@@ -103,7 +117,7 @@ const UserRegistrationForm = () => {
           }}
         />
         <Box textAlign="center">
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit" color="success">
             Cadastrar
           </Button>
         </Box>
