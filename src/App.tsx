@@ -22,7 +22,20 @@ function App() {
         </Routes>
       </Router>
     </>
-  );
-}
+import { HeaderImg } from "./components/HeaderImg";
+  import { Box, Typography } from "@mui/material";
+  import { BrowserRouter } from "react-router-dom";
+  import Layout from "./pages/Layout/Layout";
+  import AppRoutes from "./routes/AppRoutes";
 
-export default App;
+  function App() {
+    return (
+      <div className="App">
+        <BrowserRouter>
+          <Layout />
+        </BrowserRouter>
+      </div>
+    );
+  }
+
+  export default App;

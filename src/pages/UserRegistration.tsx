@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import UserRegistrationForm from "../components/UserRegistrationForm";
 
-const UserRegistration = () => {
+const UserRegistration: React.FC<any> = () => {
   return (
     <>
       <Box
