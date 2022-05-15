@@ -3,17 +3,16 @@ import React from "react";
 import UserRegistration from "./pages/UserRegistration";
 import { HeaderImg } from "./components/HeaderImg";
 import { Box, Typography } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
+import Layout from "./pages/Layout/Layout";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
     <div className="App">
-      <HeaderImg></HeaderImg>
-      <Box>
-        <Typography variant="h4" p={4} align="center">
-          Criar Ordem de Serviço
-        </Typography>
-        <UserRegistration />
-      </Box>
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
     </div>
   );
 }
