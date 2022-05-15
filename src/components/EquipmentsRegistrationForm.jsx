@@ -4,13 +4,15 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 const EquipamentsRegistration = () => {
   const [inputList, setInputList] = useState([
     {
-      marca: "",
-      proprietario: "",
-      modelo: "",
-      sistemaOperacional: "",
-      cor: "",
+      brand: "",
+      model: "",
+      sku: "",
+      description: "",
+      imageURL: "",
     },
   ]);
+
+  const [equipaments, setEquipaments] = useState();
 
   // handle input change
   const handleInputChange = (e, index) => {
@@ -32,14 +34,18 @@ const EquipamentsRegistration = () => {
     setInputList([
       ...inputList,
       {
-        marca: "",
-        proprietario: "",
-        modelo: "",
-        sistemaOperacional: "",
-        cor: "",
-        osNumber: "",
+        brand: "",
+        model: "",
+        sku: "",
+        description: "",
+        imageURL: "",
       },
     ]);
+  };
+
+  const handeSubmit = (e) => {
+    e.preventDefault();
+    setEquipaments(inputList);
   };
 
   return (
@@ -54,10 +60,12 @@ const EquipamentsRegistration = () => {
         }}
         noValidate
         autoComplete="off"
+        onSubmit={handeSubmit}
       >
         {inputList.map((x, i) => {
           return (
             <Box
+              key={i}
               width="100%"
               flexDirection="row"
               display="flex"
@@ -66,25 +74,11 @@ const EquipamentsRegistration = () => {
             >
               <Box>
                 <TextField
-                  disabled
-                  label="# Ordem de Serviço"
-                  id="osNumber"
-                  margin="normal"
-                  width="33%"
-                  value={x.osNumber}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Box>
-              <Box>
-                <TextField
                   required
                   label="Marca"
-                  id="marca"
+                  id="brand"
                   margin="normal"
-                  width="33%"
-                  value={x.marca}
+                  value={x.brand}
                   placeholder="ex.: Samsumg"
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
@@ -95,11 +89,22 @@ const EquipamentsRegistration = () => {
               <Box>
                 <TextField
                   required
-                  label="Proprietário"
-                  id="proprietario"
+                  label="Modelo"
+                  id="model"
                   margin="normal"
-                  width="33%"
-                  value={x.proprietario}
+                  value={x.model}
+                  onChange={(e) => handleInputChange(e, i)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Box>
+              <Box>
+                <TextField
+                  label="SKU"
+                  id="sku"
+                  margin="normal"
+                  value={x.sku}
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
@@ -109,12 +114,10 @@ const EquipamentsRegistration = () => {
               <Box>
                 <TextField
                   required
-                  label="Modelo"
-                  id="modelo"
+                  label="URL Imagem"
+                  id="imageURL"
                   margin="normal"
-                  width="33%"
-                  placeholder="ex.: SM-A107M/32DL"
-                  value={x.modelo}
+                  value={x.imageURL}
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
@@ -123,24 +126,10 @@ const EquipamentsRegistration = () => {
               </Box>
               <Box>
                 <TextField
-                  label="Sistema Operacional"
-                  id="sistemaOperacional"
+                  label="Descrição"
+                  id="description"
                   margin="normal"
-                  width="33%"
-                  value={x.sistemaOperacional}
-                  onChange={(e) => handleInputChange(e, i)}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Box>
-              <Box>
-                <TextField
-                  label="Cor"
-                  id="cor"
-                  margin="normal"
-                  width="33%"
-                  value={x.cor}
+                  value={x.description}
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
@@ -178,8 +167,6 @@ const EquipamentsRegistration = () => {
           </Button>
         </Box>
       </Box>
-
-      <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>
     </>
   );
 };
