@@ -4,13 +4,15 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 const EquipamentsRegistration = () => {
   const [inputList, setInputList] = useState([
     {
-      marca: "",
-      proprietario: "",
-      modelo: "",
-      sistemaOperacional: "",
-      cor: "",
+      brand: "",
+      model: "",
+      sku: "",
+      description: "",
+      imageURL: "",
     },
   ]);
+
+  const [equipaments, setEquipaments] = useState();
 
   // handle input change
   const handleInputChange = (e, index) => {
@@ -32,57 +34,47 @@ const EquipamentsRegistration = () => {
     setInputList([
       ...inputList,
       {
-        marca: "",
-        proprietario: "",
-        modelo: "",
-        sistemaOperacional: "",
-        cor: "",
-        osNumber: "",
+        brand: "",
+        model: "",
+        sku: "",
+        description: "",
+        imageURL: "",
       },
     ]);
   };
 
+  const handeSubmit = (e) => {
+    e.preventDefault();
+    setEquipaments(inputList);
+  };
+
   return (
     <>
-      <Typography variant="h6" p={2} align="center">
-        Equipamentos
-      </Typography>
       <Box
         component="form"
         sx={{
           "& .MuiTextField-root": { m: 1 },
         }}
-        noValidate
         autoComplete="off"
+        onSubmit={handeSubmit}
       >
         {inputList.map((x, i) => {
           return (
             <Box
+              key={i}
               width="100%"
               flexDirection="row"
               display="flex"
               flexWrap="wrap"
               alignItems="center"
             >
-              <Box width="33%">
-                <TextField
-                  disabled
-                  label="# Ordem de Serviço"
-                  id="osNumber"
-                  margin="normal"
-                  value={x.osNumber}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Box>
-              <Box width="33%">
+              <Box>
                 <TextField
                   required
                   label="Marca"
-                  id="marca"
+                  id="brand"
                   margin="normal"
-                  value={x.marca}
+                  value={x.brand}
                   placeholder="ex.: Samsumg"
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
@@ -90,51 +82,50 @@ const EquipamentsRegistration = () => {
                   }}
                 />
               </Box>
-              <Box width="33%">
-                <TextField
-                  required
-                  label="Proprietário"
-                  id="proprietario"
-                  margin="normal"
-                  value={x.proprietario}
-                  onChange={(e) => handleInputChange(e, i)}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </Box>
-              <Box width="33%">
+              <Box>
                 <TextField
                   required
                   label="Modelo"
-                  id="modelo"
+                  id="model"
                   margin="normal"
-                  placeholder="ex.: SM-A107M/32DL"
-                  value={x.modelo}
+                  value={x.model}
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
                   }}
                 />
               </Box>
-              <Box width="33%">
+              <Box>
                 <TextField
-                  label="Sistema Operacional"
-                  id="sistemaOperacional"
+                  label="SKU"
+                  id="sku"
                   margin="normal"
-                  value={x.sistemaOperacional}
+                  value={x.sku}
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
                   }}
                 />
               </Box>
-              <Box width="33%">
+              <Box>
                 <TextField
-                  label="Cor"
-                  id="cor"
+                  required
+                  label="URL Imagem"
+                  id="imageURL"
                   margin="normal"
-                  value={x.cor}
+                  value={x.imageURL}
+                  onChange={(e) => handleInputChange(e, i)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Box>
+              <Box>
+                <TextField
+                  label="Descrição"
+                  id="description"
+                  margin="normal"
+                  value={x.description}
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
@@ -172,8 +163,6 @@ const EquipamentsRegistration = () => {
           </Button>
         </Box>
       </Box>
-
-      <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>
     </>
   );
 };
