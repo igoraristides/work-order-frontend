@@ -49,9 +49,6 @@ const UserRegistrationForm = () => {
         autoComplete="off"
         onSubmit={handeSubmit}
       >
-        <Typography variant="h6" align="center">
-          Cliente
-        </Typography>
         <TextField
           required
           id="firstName"
