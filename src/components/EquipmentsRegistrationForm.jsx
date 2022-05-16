@@ -55,7 +55,6 @@ const EquipamentsRegistration = () => {
         sx={{
           "& .MuiTextField-root": { m: 1 },
         }}
-        noValidate
         autoComplete="off"
         onSubmit={handeSubmit}
       >
@@ -76,10 +75,10 @@ const EquipamentsRegistration = () => {
                   id="brand"
                   margin="normal"
                   value={x.brand}
-                  placeholder="ex.: Samsumg"
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
+                    style: { color: "#fff" },
                   }}
                 />
               </Box>
@@ -93,6 +92,7 @@ const EquipamentsRegistration = () => {
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
+                    style: { color: "#fff" },
                   }}
                 />
               </Box>
@@ -105,6 +105,7 @@ const EquipamentsRegistration = () => {
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
+                    style: { color: "#fff" },
                   }}
                 />
               </Box>
@@ -118,6 +119,7 @@ const EquipamentsRegistration = () => {
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
+                    style: { color: "#fff" },
                   }}
                 />
               </Box>
@@ -130,6 +132,7 @@ const EquipamentsRegistration = () => {
                   onChange={(e) => handleInputChange(e, i)}
                   InputLabelProps={{
                     shrink: true,
+                    style: { color: "#fff" },
                   }}
                 />
               </Box>

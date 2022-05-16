@@ -1,7 +1,19 @@
 import React, { useState } from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, makeStyles, TextField } from "@mui/material";
+
+const useStyles = makeStyles((theme) => ({
+  input: {
+    color: "#fff",
+  },
+  notchedOutline: {
+    borderWidth: "1px",
+    borderColor: "yellow !important",
+  },
+}));
 
 const UserRegistrationForm = () => {
+  const classes = useStyles();
+
   const [client, setClient] = useState({
     firstName: undefined,
     lastName: undefined,
@@ -29,8 +41,6 @@ const UserRegistrationForm = () => {
       cpf: cpfClient,
     });
 
-    console.log(client);
-
     setFirstNameClient("");
     setLastNameClient("");
     setCellphoneClient("");
@@ -51,6 +61,7 @@ const UserRegistrationForm = () => {
       >
         <TextField
           required
+          variant="outlined"
           id="firstName"
           label="Primeiro nome"
           value={firstNameClient}
@@ -58,6 +69,13 @@ const UserRegistrationForm = () => {
           margin="normal"
           InputLabelProps={{
             shrink: true,
+            style: { color: "#fff" },
+          }}
+          InputProps={{
+            className: classes.input,
+            classes: {
+              notchedOutline: classes.notchedOutline,
+            },
           }}
         />
         <TextField
@@ -69,6 +87,7 @@ const UserRegistrationForm = () => {
           margin="normal"
           InputLabelProps={{
             shrink: true,
+            style: { color: "#fff" },
           }}
         />
         <TextField
@@ -80,6 +99,7 @@ const UserRegistrationForm = () => {
           margin="normal"
           InputLabelProps={{
             shrink: true,
+            style: { color: "#fff" },
           }}
         />
         <TextField
@@ -90,6 +110,7 @@ const UserRegistrationForm = () => {
           onChange={(e) => setPhoneClient(e.target.value)}
           InputLabelProps={{
             shrink: true,
+            style: { color: "#fff" },
           }}
         />
         <TextField
@@ -101,6 +122,7 @@ const UserRegistrationForm = () => {
           onChange={(e) => setCellphoneClient(e.target.value)}
           InputLabelProps={{
             shrink: true,
+            style: { color: "#fff" },
           }}
         />
         <TextField
@@ -111,6 +133,7 @@ const UserRegistrationForm = () => {
           onChange={(e) => setEmailClient(e.target.value)}
           InputLabelProps={{
             shrink: true,
+            style: { color: "#fff" },
           }}
         />
         <Box textAlign="center">

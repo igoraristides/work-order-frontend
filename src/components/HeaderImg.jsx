@@ -18,3 +18,5 @@ export const HeaderImg = () => {
     </section>
   );
 };
+
+export default HeaderImg;

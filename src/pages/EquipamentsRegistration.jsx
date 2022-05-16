@@ -6,23 +6,19 @@ import EquipamentsRegistrationForm from "../components/EquipmentsRegistrationFor
 const EquipamentsRegistration = () => {
   return (
     <>
-      <Typography variant="h5" p={2} align="center">
-        Equipamentos
-      </Typography>
       <Box
         sx={{
-          maxWidth: "55%",
-          margin: "10px auto",
-          border: "4px solid white",
+          marginLeft: "10%",
           padding: "10px",
-          borderRadius: "10px",
-          backgroundColor: "white",
           display: "flex",
           flexDirection: "column",
           flexWrap: "wrap",
           position: "relative",
         }}
       >
+        <Typography variant="h5" p={4} align="center">
+          Cadastrar Equipamentos
+        </Typography>
         <EquipamentsRegistrationForm />
       </Box>
     </>
