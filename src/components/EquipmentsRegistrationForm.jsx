@@ -63,7 +63,7 @@ const EquipamentsRegistration = () => {
             <Box
               key={i}
               width="100%"
-              flexDirection="row"
+              flexDirection="column"
               display="flex"
               flexWrap="wrap"
               alignItems="center"
