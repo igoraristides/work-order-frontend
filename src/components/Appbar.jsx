@@ -5,7 +5,8 @@ import * as IoIcons from "react-icons/io";
 import { Menu, MenuItem, ProSidebar } from "react-pro-sidebar";
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
-import "react-pro-sidebar/dist/css/styles.css";
+
+import "./custom.scss";
 
 export default function ButtonAppBar() {
   const [sidebar, setSidebar] = useState(true);
@@ -17,17 +18,21 @@ export default function ButtonAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar sx={{ backgroundColor: "#1d1d1d" }}>
+        <Toolbar sx={{ backgroundColor: "#b2b2b2" }}>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, color: "black" }}
           >
             <IoIcons.IoMdMenu onClick={handleSidebar} />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, color: "black" }}
+          >
             Arruma Meu Celola - Criar Ordem de Serviço
           </Typography>
         </Toolbar>
