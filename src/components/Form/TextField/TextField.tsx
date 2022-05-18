@@ -15,11 +15,14 @@ export const ControlledTextField: FC<HookFormProps & TextFieldProps> = (
       defaultValue={props.defaultValue || ""}
       render={({
         field: { onChange, onBlur, name: fieldName, value },
-        fieldState: { error }
+        fieldState: { error },
+
       }) => (
         <TextField
           {...props}
+          helperText={error ? error.message : null}
           onChange={onChange}
+          error={!!error}
           value={value}
           onBlur={onBlur}
           name={fieldName}

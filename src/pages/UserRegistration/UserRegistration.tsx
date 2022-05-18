@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import UserRegistrationForm from "../components/UserRegistrationForm";
+import UserRegistrationForm from "./UserRegistrationForm";
 import { AiOutlineUserAdd } from 'react-icons/ai'
 
 const UserRegistration: React.FC<any> = () => {

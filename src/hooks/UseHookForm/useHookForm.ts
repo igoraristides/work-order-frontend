@@ -8,6 +8,7 @@ const useHookForm = (initialValues: any, schema: any, mode?: Mode) => {
         defaultValues: initialValues,
         reValidateMode: 'onSubmit',
         resolver: yupResolver(schema),
+
         mode: mode || 'all'
     })
     return { methods }

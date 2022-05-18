@@ -3,14 +3,16 @@ import AppRoutes from '../../routes/AppRoutes';
 import { AppBar, Box, Toolbar } from "@mui/material";
 import * as IoIcons from "react-icons/io";
 import { Menu, MenuItem, ProSidebar } from "react-pro-sidebar";
+import { BiUserCircle } from 'react-icons/bi'
+import { MdDashboard } from 'react-icons/md'
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-import "../../components/custom.scss";
+import "../../styles/custom.scss";
 
 import logo from '../../assets/logo.png'
 
-import { BiUserCircle } from 'react-icons/bi'
+
 
 interface Props { }
 
@@ -38,9 +40,15 @@ const Layout: React.FC<Props> = () => {
                         <ProSidebar collapsed={false}>
                             <Menu iconShape="circle">
                                 <MenuItem
-                                    icon={<AiIcons.AiOutlineUserAdd />}
+                                    icon={<MdDashboard />}
                                 >
                                     <Link to="/" />
+                                    Dashboard
+                                </MenuItem>
+                                <MenuItem
+                                    icon={<AiIcons.AiOutlineUserAdd />}
+                                >
+                                    <Link to="/client" />
                                     Cadastrar Clientes
                                 </MenuItem>
                                 <MenuItem
