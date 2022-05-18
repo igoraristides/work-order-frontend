@@ -8,6 +8,7 @@ import Form from "../../components/Form/Form";
 import { NewClient } from "../../api/api";
 import { toast } from "react-toastify";
 
+
 const UserRegistrationForm: React.FC<any> = () => {
 
   const initialValues: UserRegistration = {
@@ -35,6 +36,7 @@ const UserRegistrationForm: React.FC<any> = () => {
     }
 
   }
+
 
 
   return (
@@ -65,12 +67,14 @@ const UserRegistrationForm: React.FC<any> = () => {
             control={methods.control}
             label='Telefone'
             style={{ marginBottom: '10px' }}
+            mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
           />
           <ControlledTextField
             name='cellphone'
             control={methods.control}
             label='Celular'
             style={{ marginBottom: '10px' }}
+            mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
           />
           <ControlledTextField
             name='email'

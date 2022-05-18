@@ -5,4 +5,5 @@ export interface HookFormProps {
     name: string;
     rules?: UseControllerProps["rules"];
     defaultValue?: any;
+    mask?: any;
 }

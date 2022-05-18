@@ -3,11 +3,15 @@ import { Controller } from "react-hook-form";
 import { TextField, TextFieldProps } from "@mui/material";
 import * as React from "react";
 import { HookFormProps } from "../../../hooks/UseHookForm/HookFormProps";
+// @ts-ignore
+import MaskedInput from 'react-text-mask';
+
 
 export const ControlledTextField: FC<HookFormProps & TextFieldProps> = (
   props
 ) => {
-  return (
+
+    return (
     <Controller
       name={props.name}
       control={props.control}
@@ -18,7 +22,18 @@ export const ControlledTextField: FC<HookFormProps & TextFieldProps> = (
         fieldState: { error },
 
       }) => (
-        <TextField
+
+          props.mask?
+                  <MaskedInput
+                      {...props}
+                      render={(ref: React.Ref<any> | undefined, _props: JSX.IntrinsicAttributes & TextFieldProps) => (
+                      <TextField
+                          inputRef={ref}
+                          {..._props}
+                      />
+                  )}/>
+              :
+          <TextField
           {...props}
           helperText={error ? error.message : null}
           onChange={onChange}
