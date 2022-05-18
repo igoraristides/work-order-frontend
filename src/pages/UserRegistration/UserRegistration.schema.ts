@@ -13,7 +13,7 @@ export const userRegistrationSchema = (): Yup.SchemaOf<UserRegistration> => {
         cpf: Yup
             .string()
             .required("Campo obrigatório"),
-        phone: Yup
+        telephone: Yup
             .string()
             .required("Campo obrigatório"),
         cellphone: Yup

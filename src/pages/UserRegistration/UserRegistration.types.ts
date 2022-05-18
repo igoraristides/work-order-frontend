@@ -2,7 +2,7 @@ export interface UserRegistration {
     firstName: string,
     lastName: string,
     cpf: string,
-    phone: string,
+    telephone: string,
     cellphone: string,
     email: string,
 }

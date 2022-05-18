@@ -16,7 +16,7 @@ const EquipamentsRegistration = () => {
         model: "",
         sku: "",
         description: "",
-        imageURL: "",
+        photoURL: "",
     }
 
     const { methods } = useHookForm(initialValues, equipamentRegistrationSchema(), 'onSubmit')
@@ -63,7 +63,7 @@ const EquipamentsRegistration = () => {
                         style={{ marginBottom: '10px' }}
                     />
                     <ControlledTextField
-                        name='imageURL'
+                        name='photoURL'
                         control={methods.control}
                         label='URL da imagem'
                         style={{ marginBottom: '10px' }}

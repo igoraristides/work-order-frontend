@@ -14,7 +14,7 @@ const UserRegistrationForm: React.FC<any> = () => {
     firstName: "",
     lastName: "",
     cpf: "",
-    phone: "",
+    telephone: "",
     cellphone: "",
     email: "",
   };
@@ -61,7 +61,7 @@ const UserRegistrationForm: React.FC<any> = () => {
             style={{ marginBottom: '10px' }}
           />
           <ControlledTextField
-            name='phone'
+            name='telephone'
             control={methods.control}
             label='Telefone'
             style={{ marginBottom: '10px' }}

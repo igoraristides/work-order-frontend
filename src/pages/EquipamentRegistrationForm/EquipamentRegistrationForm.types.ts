@@ -3,5 +3,5 @@ export interface EquipamentRegistration {
     model: string,
     sku: string,
     description: string,
-    imageURL: string
+    photoURL: string
 }
