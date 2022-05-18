@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Typography } from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import { Clients, Equipaments } from '../../api/api';
 import CircularProgress from '@mui/material/CircularProgress';
 import { ClientResponseDto } from '../../api/dtos/ClientDto';
@@ -38,78 +38,82 @@ const Dashboard: React.FC<any> = () => {
 
     return (
 
+        <Box display="flex" flexDirection="row" width="100%">
+                <Box width="50%">
+                    <Typography variant="h5" marginTop={4}  align="center" color='#036ba2'>
+                        Clientes
+                    </Typography>
+                    <TableContainer component={Paper} sx={{ maxWidth: '80%', maxHeight: '300px', padding: '20px', margin: '20px' }} >
+                        {loading ? (
+                            <CircularProgress />
+                        ) : (
+                            <Table size="small" aria-label="a dense table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Nome Completo</TableCell>
+                                        <TableCell align="right">Telefone</TableCell>
+                                        <TableCell align="right">E-mail</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {clients.map((client,i) => (
+                                        <TableRow
+                                            key={client.id}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 },
+                                                    ...(i%2==0 && {backgroundColor: "#bde0fe"}),
+                                        }}
+                                        >
+                                            <TableCell component="th" scope="row">
+                                                {client.name}
+                                            </TableCell>
+                                            <TableCell align="right">{client.Phone[0]?.number}</TableCell>
+                                            <TableCell align="right">{client.Email[0]?.address}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        )}
+                    </TableContainer>
 
-        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography variant="h5" p={4} align="center" color='#036ba2'>
-                    Clientes
-                </Typography>
-
-                <TableContainer component={Paper} sx={{ maxWidth: '80%', maxHeight: '300px', padding: '20px', margin: '30px' }} >
+                </Box>
+                <Box width="50%">
+                    <Typography variant="h5" marginTop={4} align="center" color='#036ba2'>
+                        Equipamentos
+                    </Typography>
                     {loading ? (
                         <CircularProgress />
                     ) : (
-                        <Table size="small" aria-label="a dense table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Nome Completo</TableCell>
-                                    <TableCell align="right">Telefone</TableCell>
-                                    <TableCell align="right">E-mail</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {clients.map((client) => (
-                                    <TableRow
-                                        key={client.id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell component="th" scope="row">
-                                            {client.name}
-                                        </TableCell>
-                                        <TableCell align="right">{client.Phone[0]?.number}</TableCell>
-                                        <TableCell align="right">{client.Email[0]?.address}</TableCell>
+                        <TableContainer component={Paper} sx={{ maxWidth: '80%', maxHeight: '300px', padding: '20px', margin: '20px' }}>
+                            <Table size="small" aria-label="a dense table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Marca</TableCell>
+                                        <TableCell align="right">Modelo</TableCell>
+                                        <TableCell align="right">Descrição</TableCell>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    )}
-                </TableContainer>
+                                </TableHead>
+                                <TableBody>
+                                    {equipaments.map((equipament,i) => (
+                                        <TableRow
+                                            key={equipament.id}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 },
+                                                ...(i%2==0 && {backgroundColor: "#bde0fe"}),
+                                            }}
+                                        >
+                                            <TableCell component="th" scope="row">
+                                                {equipament.brand}
+                                            </TableCell>
+                                            <TableCell align="right">{equipament.model}</TableCell>
+                                            <TableCell align="right">{equipament.description}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    )} </Box>
 
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography variant="h5" p={4} align="center" color='#036ba2'>
-                    Equipamentos
-                </Typography>
-                {loading ? (
-                    <CircularProgress />
-                ) : (
-                    <TableContainer component={Paper} sx={{ maxWidth: '80%', maxHeight: '300px', padding: '20px', margin: '30px' }}>
-                        <Table size="small" aria-label="a dense table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Marca</TableCell>
-                                    <TableCell align="right">Modelo</TableCell>
-                                    <TableCell align="right">Descrição</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {equipaments.map((equipament) => (
-                                    <TableRow
-                                        key={equipament.id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell component="th" scope="row">
-                                            {equipament.brand}
-                                        </TableCell>
-                                        <TableCell align="right">{equipament.model}</TableCell>
-                                        <TableCell align="right">{equipament.description}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                )} </div>
-        </div>
+        </Box>
+
 
     );
 }

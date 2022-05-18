@@ -17,6 +17,8 @@ export const equipamentRegistrationSchema = (): Yup.SchemaOf<EquipamentRegistrat
             .required("Campo obrigatório"),
         photoURL: Yup
             .string()
+            .ensure()
+            .url()
             .required("Campo obrigatório"),
     })
 }

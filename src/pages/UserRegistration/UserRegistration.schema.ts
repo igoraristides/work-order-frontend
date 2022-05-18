@@ -21,6 +21,7 @@ export const userRegistrationSchema = (): Yup.SchemaOf<UserRegistration> => {
             .required("Campo obrigatório"),
         email: Yup
             .string()
+            .email()
             .required("Campo obrigatório"),
     })
 }
