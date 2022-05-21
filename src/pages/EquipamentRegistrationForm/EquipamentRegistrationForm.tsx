@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Box, Button } from "@mui/material";
 import { EquipamentRegistration } from "./EquipamentRegistrationForm.types";
-import { ControlledTextField } from "../../components/Form/TextField/TextField";
+import { ControlledTextField } from "../../components/HookForm/TextField/TextField";
 import useHookForm from "../../hooks/UseHookForm/useHookForm";
-import Form from "../../components/Form/Form";
+import Form from "../../components/HookForm/Form/Form";
 import { equipamentRegistrationSchema } from "./EquipamentRegistrationForm.schema";
 import { toast } from "react-toastify";
 import { NewEquipament } from "../../api/api";

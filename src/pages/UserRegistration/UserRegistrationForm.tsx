@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Box, Button } from "@mui/material";
-import { ControlledTextField } from "../../components/Form/TextField/TextField";
+import { ControlledTextField } from "../../components/HookForm/TextField/TextField";
 import useHookForm from "../../hooks/UseHookForm/useHookForm";
 import { UserRegistration } from "./UserRegistration.types";
 import { userRegistrationSchema } from "./UserRegistration.schema";
-import Form from "../../components/Form/Form";
+import Form from "../../components/HookForm/Form/Form";
 import { NewClient } from "../../api/api";
 import { toast } from "react-toastify";
 

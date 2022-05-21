@@ -4,7 +4,7 @@ import { AppBar, Box, Toolbar } from "@mui/material";
 import * as IoIcons from "react-icons/io";
 import { Menu, MenuItem, ProSidebar } from "react-pro-sidebar";
 import { BiUserCircle } from 'react-icons/bi'
-import { MdDashboard } from 'react-icons/md'
+import { MdDashboard, MdOutlineHomeRepairService, MdMiscellaneousServices } from 'react-icons/md'
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 
@@ -56,6 +56,19 @@ const Layout: React.FC<Props> = () => {
                                 >
                                     <Link to="/newDevice" />
                                     Cadastrar Equipamentos
+                                </MenuItem>
+                                <MenuItem
+                                    icon={<MdOutlineHomeRepairService />}
+                                >
+                                    <Link to="/newService" />
+                                    Cadastrar Equipamentos
+                                </MenuItem>
+
+                                <MenuItem
+                                    icon={<MdMiscellaneousServices />}
+                                >
+                                    <Link to="/newServiceOrder" />
+                                    Cadastrar Ordem de Serviço
                                 </MenuItem>
                             </Menu>
                         </ProSidebar>
