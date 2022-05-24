@@ -1,73 +1,81 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Button } from "@mui/material";
 import { ControlledTextField } from "../../components/HookForm/TextField/TextField";
 import useHookForm from "../../hooks/UseHookForm/useHookForm";
 import { ServiceRegistration } from "./ServiceRegistration.types";
 import { ServiceRegistrationSchema } from "./ServiceRegistration.schema";
 import Form from "../../components/HookForm/Form/Form";
-import { NewClient } from "../../api/api";
+import { NewService } from "../../api/api";
 import { toast } from "react-toastify";
 
-
 const ServiceRegistrationForm: React.FC<any> = () => {
-
   const initialValues: ServiceRegistration = {
     description: "",
     estimatedTimeCost: "",
-    estimatedMaterialCost: ""
+    estimatedMaterialCost: "",
   };
 
-  const FORM_ID = 'NewService'
+  const FORM_ID = "NewService";
 
-  const { methods } = useHookForm(initialValues, ServiceRegistrationSchema(), 'onSubmit')
+  const { methods } = useHookForm(
+    initialValues,
+    ServiceRegistrationSchema(),
+    "onSubmit"
+  );
 
   const HandleSubmit = async (formValues: any) => {
-
+    formValues.estimatedMaterialCost = Number(formValues.estimatedMaterialCost);
+    formValues.estimatedTimeCost = Number(formValues.estimatedTimeCost);
+    console.log(formValues);
     try {
-      const response = await NewClient(formValues);
+      console.log(formValues);
+      const response = await NewService(formValues);
       toast.success("Serviço cadastrado com sucesso");
-      methods.reset()
+      methods.reset();
     } catch {
       toast.error("Falha ao cadastrar serviço");
-      methods.reset()
+      methods.reset();
     }
-
-  }
-
-
+  };
 
   return (
-
-    <Box style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+    <Box style={{ display: "flex", flexDirection: "column", width: "100%" }}>
       <Form id={FORM_ID} methods={methods} onSubmit={HandleSubmit}>
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+        <div
+          style={{ display: "flex", flexDirection: "column", width: "100%" }}
+        >
           <ControlledTextField
-            name='description'
+            name="description"
             control={methods.control}
-            label='Nome do Serviço'
-            style={{ marginBottom: '10px' }}
+            label="Nome do Serviço"
+            style={{ marginBottom: "10px" }}
           />
           <ControlledTextField
-            name='estimatedTimeCost'
+            name="estimatedTimeCost"
             control={methods.control}
-            label='Tempo Estimado'
-            style={{ marginBottom: '10px' }}
+            label="Tempo Estimado (em minutos)"
+            style={{ marginBottom: "10px" }}
           />
           <ControlledTextField
-            name='estimatedMaterialCost'
+            name="estimatedMaterialCost"
             control={methods.control}
-            label='Preço'
-            style={{ marginBottom: '10px' }}
+            label="Preço (R$)"
+            style={{ marginBottom: "10px" }}
           />
         </div>
       </Form>
       <Box textAlign="center">
-        <Button variant="contained" type="submit" form={FORM_ID} color={"primary"} style={{ marginTop: '20px' }}>
+        <Button
+          variant="contained"
+          type="submit"
+          form={FORM_ID}
+          color={"primary"}
+          style={{ marginTop: "20px" }}
+        >
           Cadastrar
         </Button>
       </Box>
     </Box>
-
   );
 };
 
