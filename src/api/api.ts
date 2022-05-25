@@ -1,4 +1,5 @@
 import axios, { AxiosPromise } from "axios";
+import { ChangeStatus } from "./dtos/updateStatus";
 
 export const api = axios.create({
   baseURL: "http://workorder.jesuisjedi.com",
@@ -36,3 +37,8 @@ export function ServiceOrder(): AxiosPromise<any> {
 export function NewServiceOrder(newServiceOrderDTO: any): AxiosPromise<any> {
   return api.post("work-order", newServiceOrderDTO);
 }
+
+export function UpdateStatus(ChangeStatus: ChangeStatus): AxiosPromise<any> {
+  return api.patch("work-order", ChangeStatus);
+}
+

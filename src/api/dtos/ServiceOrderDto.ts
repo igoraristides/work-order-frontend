@@ -3,13 +3,15 @@ export interface ServiceOrderResponseDto {
   obs: string;
   Client: {
     id: string;
+    name: string;
   };
   Task: [
     {
-      id: 1;
+      id: number;
     }
   ];
   WorkOrderStatus: {
+    id: number;
     description: string;
   };
 }
