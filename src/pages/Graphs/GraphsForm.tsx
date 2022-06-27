@@ -20,7 +20,11 @@ const GraphForm: React.FC<any> = () => {
 
     const [serie3, setSerie3] = React.useState<any>([]);
 
-    const [dates, setDates] = React.useState<any>([]);
+    const [data, setData] = React.useState<any>();
+
+    const [graph, setGraph] = React.useState<string>("");
+
+    console.log(serie, serie2, serie3)
 
     const graphData: Graphs[] = [
         {
@@ -36,8 +40,22 @@ const GraphForm: React.FC<any> = () => {
             type: "Receitas de serviços realizados por período "
         }];
 
+    React.useEffect(() => {
+        GetTopFiveDevices();
+    }, [serie2]);
 
-    const [graph, setGraph] = React.useState<string>("");
+    React.useEffect(() => {
+        GetTotalOrderByInterval();
+    }, [serie]);
+
+    React.useEffect(() => {
+        setSerie([]);
+        setSerie2([]);
+        setSerie3([]);
+        setData(undefined);
+    }, [graph]);
+
+
 
     const handleGraphs = () => {
         return graphData.map((graph) => ({
@@ -52,91 +70,201 @@ const GraphForm: React.FC<any> = () => {
 
             case "1":
                 return (
-                    <FirstGrapth />
+                    <div style={{ width: '100%' }}>
+                        <FirstGrapth setData={setSerie} />
+
+                        {serie.length > 0 && (
+                            <ReactEcharts
+                                style={{
+                                    height: "400px",
+                                    width: "100%",
+                                    marginBottom: "50px",
+                                }}
+                                option={data}
+                            />
+                        )
+                        }
+                    </div>
                 );
             case "2":
 
                 return (
-                    <SecondGrapth />
+                    <div style={{ width: '100%' }}>
+                        <SecondGrapth setData={setSerie2} />
+
+                        {serie2.length > 0 &&
+                            <ReactEcharts
+                                style={{
+                                    height: "400px",
+                                    width: "100%",
+                                    marginBottom: "50px",
+                                }}
+                                option={data}
+                            />
+                        }
+
+                    </div>
                 );
 
             case "3":
 
                 return (
-                    <ThirdGrapth />
+                    <div style={{ width: '100%' }}>
+                        <ThirdGrapth setData={setSerie3} />
+
+                        {/* <ReactEcharts
+                            style={{
+                                height: "400px",
+                                width: "100%",
+                                marginBottom: "50px",
+                            }}
+                            option={serie3}
+                        /> */}
+                    </div>
                 );
 
         }
     }
 
-    const data = {
-        tooltip: {
-            trigger: "axis",
-            axisPointer: {
-                label: {
-                    backgroundColor: "#6a7985",
+    const GetTotalOrderByInterval = () => {
+
+        let out = {
+            labels: serie.map((item: any) => new Date(item.day).toLocaleDateString("pt-BR")),
+            series: serie.map((item: any) => item.count),
+        }
+
+        const dataForChart = {
+            tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                    label: {
+                        backgroundColor: "#6a7985",
+                    },
                 },
             },
-        },
-        legend: {
-            data: [dates[1]],
-        },
-        dataZoom: [
-            {
-                type: "slider",
-                height: 8,
-                bottom: 20,
-                borderColor: "transparent",
-                backgroundColor: "#e2e2e2",
-                handleIcon:
-                    "M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z", // jshint ignore:line
-                handleSize: 20,
-                handleStyle: {
-                    shadowBlur: 6,
-                    shadowOffsetX: 1,
-                    shadowOffsetY: 2,
-                    shadowColor: "#aaa",
+            dataZoom: [
+                {
+                    type: "slider",
+                    height: 8,
+                    bottom: 20,
+                    borderColor: "transparent",
+                    backgroundColor: "#e2e2e2",
+                    handleIcon:
+                        "M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z", // jshint ignore:line
+                    handleSize: 20,
+                    handleStyle: {
+                        shadowBlur: 6,
+                        shadowOffsetX: 1,
+                        shadowOffsetY: 2,
+                        shadowColor: "#aaa",
+                    },
+                },
+                {
+                    type: "inside",
+                },
+            ],
+            grid: {
+                left: "3%",
+                right: "4%",
+                bottom: "3%",
+                containLabel: true,
+            },
+            xAxis: {
+                type: "category",
+                data: out.labels,
+                show: true,
+
+            },
+            yAxis: {
+                type: "value",
+                axisLabel: {
+                    color: "gray",
+                    inside: true,
                 },
             },
-            {
-                type: "inside",
+            series: [
+                {
+                    type: "bar",
+                    data: out.series,
+                    symbol: "none",
+                    color: "#f7d917",
+                }
+            ],
+        };
+        setData(dataForChart);
+    }
+
+    const GetTopFiveDevices = () => {
+        let out = {
+            labels: serie2.map((item: any) => item.service_description),
+            series: serie2.map((item: any) => item.service_count),
+        }
+
+        const dataForChart = {
+            tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                    label: {
+                        backgroundColor: "#6a7985",
+                    },
+                },
             },
-        ],
-        grid: {
-            left: "3%",
-            right: "4%",
-            bottom: "3%",
-            containLabel: true,
-        },
-        xAxis: {
-            type: "category",
-            data: dates,
-            show: true,
-            axisLabel: {
-                color: "gray",
-                fontWeight: "bold",
-                rotate: 90,
-                interval: 6,
+            legend: {
+                data: out.labels
             },
-        },
-        yAxis: {
-            type: "value",
-            axisLabel: {
-                color: "gray",
-                inside: true,
+            dataZoom: [
+                {
+                    type: "slider",
+                    height: 8,
+                    bottom: 20,
+                    borderColor: "transparent",
+                    backgroundColor: "#e2e2e2",
+                    handleIcon:
+                        "M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z", // jshint ignore:line
+                    handleSize: 20,
+                    handleStyle: {
+                        shadowBlur: 6,
+                        shadowOffsetX: 1,
+                        shadowOffsetY: 2,
+                        shadowColor: "#aaa",
+                    },
+                },
+                {
+                    type: "inside",
+                },
+            ],
+            grid: {
+                left: "3%",
+                right: "4%",
+                bottom: "3%",
+                containLabel: true,
             },
-        },
-        series: [
-            {
-                name: dates[1],
-                type: "line",
-                smooth: true,
-                data: serie,
-                symbol: "none",
-                color: "#f7d917",
-            }
-        ],
-    };
+            xAxis: {
+                type: "category",
+                data: out.labels,
+                show: true,
+
+            },
+            yAxis: {
+                type: "value",
+                axisLabel: {
+                    color: "gray",
+                    inside: true,
+                },
+            },
+            series: [
+                {
+                    type: "bar",
+                    data: out.series,
+                    symbol: "none",
+                    color: "#f7d917",
+                }
+            ],
+        };
+        setData(dataForChart);
+    }
+
+
 
     return (
         <Box display="flex" flexDirection="row" width="100%" flexWrap="wrap">
@@ -160,14 +288,7 @@ const GraphForm: React.FC<any> = () => {
             </Box>
             {graph != "0" && Render()}
 
-            {/* <ReactEcharts
-        style={{
-          height: "400px",
-          width: "70%",
-          marginBottom: "50px",
-        }}
-        option={data}
-      /> */}
+
         </Box>
     );
 };

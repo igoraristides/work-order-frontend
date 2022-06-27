@@ -10,6 +10,8 @@ import { ByDeviceSchema } from '../Graphs.schema'
 
 const SecondGrapth = (props: any) => {
 
+    const { setData } = props
+
     const FORM_ID = 'Graph2'
 
 
@@ -67,13 +69,10 @@ const SecondGrapth = (props: any) => {
         try {
 
             const response = await GetGraphByDevice(formValues);
-            console.log(response);
-            toast.success("Sucesso");
-            methods.reset();
-
+            setData(response.data);
+            toast.success("Gráfico gerado com sucesso!");
         } catch {
-            toast.error("Erro");
-            methods.reset();
+            toast.error("Erro ao gerar gráfico!");
         }
     }
 

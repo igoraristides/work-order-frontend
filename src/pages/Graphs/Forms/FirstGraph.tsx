@@ -13,6 +13,8 @@ import { GetFormattedDate } from './Utils'
 
 const FirstGrapth = (props: any) => {
 
+    const { setData } = props
+
     const FORM_ID = 'Graph1'
 
     const initialValuesFirstGrapth: FromIntervalDto = {
@@ -30,12 +32,12 @@ const FirstGrapth = (props: any) => {
         try {
 
             const response = await GetGraphFromInterval(requestBody);
-            console.log(response);
-            toast.success("Sucesso");
+            setData(response.data);
+            toast.success("Gráfico gerado com sucesso!");
             methods.reset();
 
         } catch {
-            toast.error("Erro");
+            toast.error("Erro ao gerar gráfico!");
             methods.reset();
         }
 
@@ -44,7 +46,6 @@ const FirstGrapth = (props: any) => {
 
     const { methods } = useHookForm(initialValuesFirstGrapth, byIntervalSchema(), 'onSubmit')
 
-    console.log(methods.watch())
     return (
         <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
             <Form id={FORM_ID} methods={methods} onSubmit={HandleSubmit}>
