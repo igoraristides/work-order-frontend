@@ -287,8 +287,6 @@ const GraphForm: React.FC<any> = () => {
                 </div>
             </Box>
             {graph != "0" && Render()}
-
-
         </Box>
     );
 };

@@ -1,7 +1,7 @@
 export interface ServiceOrderRegistration {
     idClient: string,
-    task: Array<Task>
-    observations: string
+    tasks?: Array<object>
+    obs?: string
 }
 
 export interface Task {

@@ -1,48 +1,56 @@
 import React, { useState } from "react";
-import { Box, Button, TextField } from "@mui/material";
-import MultipleSelectCheckmarks from "../../components/MultipleSelectCheckmarks/MultipleSelectCheckmarks";
-import Select from "../../components/Select/Select";
-import { ClientResponseDto } from "../../api/dtos/ClientDto";
-import { EquipamentResponseDto } from "../../api/dtos/EquipamentDto";
+import { Box, Button } from "@mui/material";
+
 import { Clients, Equipaments, NewServiceOrder, Services } from "../../api/api";
 import { ServiceResponseDto } from "../../api/dtos/ServiceDto";
 import { toast } from "react-toastify";
+import ControlledSelect, { keyValueSelect } from "../../components/HookForm/Select";
+import { ServiceRegistrationFormSchema } from "./ServiceOrderRegistrationForm.schema";
+import useHookForm from "../../hooks/UseHookForm/useHookForm";
+import { ControlledTextField } from "../../components/HookForm/TextField/TextField";
+
+import Modal from "../../components/Modal/Modal";
+import { Task } from "./ServiceOrderRegistration.types";
+import Form from "../../components/HookForm/Form/Form";
 
 const ServiceOrderRegistrationForm: React.FC<any> = () => {
-  const [equipaments, setEquipaments] = useState<string>("");
-  const [services, setServices] = useState<string[]>([]);
-  const [client, setClient] = useState<string>("");
-  const [observations, setObservations] = React.useState<string>("");
-  const [clientsList, setClientsList] = React.useState<ClientResponseDto[]>([]);
-  const [servicesList, setServicesList] = React.useState<ServiceResponseDto[]>(
-    []
-  );
-  const [equipamentsList, setEquipamentsList] = React.useState<
-    EquipamentResponseDto[]
-  >([]);
-  const [serviceOrder, setServiceOrder] = React.useState<object>({
-    idClient: "",
-    tasks: [
-      {
-        services: "",
-        deviceID: "",
-      },
-    ],
 
+  const [clientsList, setClientsList] = React.useState<keyValueSelect[]>([]);
+  const [servicesList, setServicesList] = React.useState<keyValueSelect[]>([]);
+  const [equipamentsList, setEquipamentsList] = React.useState<keyValueSelect[]>([]);
+  const [task, setTask] = useState<Task[]>([]);
+
+  const FORM_ID = 'odio'
+
+  const initialsValues = {
+    idClient: "",
+    tasks: [],
     obs: "",
-  });
+  };
+
+  const { methods } = useHookForm(initialsValues, ServiceRegistrationFormSchema(), 'onSubmit')
 
   const init = async () => {
     try {
-      var responseClient = await Clients();
-      var responseEquipaments = await Equipaments();
-      var responseServices = await Services();
+      var responseClient = (await Clients()).data;
+      var responseEquipaments = (await Equipaments()).data;
+      var responseServices = (await Services()).data;
 
-      setClientsList(responseClient.data);
+      setClientsList([]);
+      responseClient.forEach(element => {
+        setClientsList(prevState => [...prevState, { key: element.name, value: element.id }])
+      });
 
-      setEquipamentsList(responseEquipaments.data);
+      setEquipamentsList([]);
+      responseEquipaments.forEach(element => {
+        setEquipamentsList(prevState => [...prevState, { key: element.brand + " " + element.model, value: element.id.toString() }])
+      });
 
-      setServicesList(responseServices.data);
+      setServicesList([]);
+      responseServices.forEach(element => {
+        setServicesList(prevState => [...prevState, { key: element.description, value: element.id.toString() }])
+      });
+
     } catch (error) { }
   };
 
@@ -50,89 +58,56 @@ const ServiceOrderRegistrationForm: React.FC<any> = () => {
     init();
   }, []);
 
-  const handleNames = () => {
-    return clientsList.map((client) => ({
-      value: client.id,
-      key: client.name,
-    }));
+
+  React.useEffect(() => {
+    methods.setValue('tasks', task);
+  }, [task]);
+
+
+  const handleSubmit = async (formValues: any) => {
+    console.log(formValues);
   };
 
-  const handleEquipments = () => {
-    return equipamentsList.map((equipments) => ({
-      key: equipments.brand + " " + equipments.model,
-      value: String(equipments.id),
-    }));
-  };
 
-  const handleServices = () => {
-    return servicesList.map((service) => ({
-      key: service.description,
-      value: String(service.id),
-    }));
-  };
+  const RenderTask = () => {
+    return (
+      <div className="cell">
+        <div style={{ display: "flex", flexDirection: "row", width: "100%" }}>
+          <span style={{ marginRight: '10px' }}>  {task.length}</span>
+          <span> V </span>
+        </div>
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    await setServiceOrder({
-      idClient: client,
-      tasks: [
-        {
-          services: services.map((s) => ({ id: +s })),
-          deviceID: Number(equipaments),
-        },
-      ],
-      obs: observations,
-    });
-    try {
-      const response = await NewServiceOrder(serviceOrder);
-      toast.success("Serviço cadastrado com sucesso");
-    } catch {
-      toast.error("Falha ao cadastrar serviço");
-    }
-    setEquipaments("");
-    setClient("");
-    setServices([]);
-    setObservations("");
-  };
+      </div>
+    )
+
+  }
 
   return (
     <Box style={{ display: "flex", flexDirection: "column", width: "100%" }}>
-      <Box
-        component="form"
-        sx={{
-          "& .MuiTextField-root": { width: "100%" },
-        }}
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <Select
-          items={handleNames()}
-          setItemName={setClient}
-          itemName={client}
-          label="Cliente"
+      <Form id={FORM_ID} methods={methods} onSubmit={handleSubmit}>
+
+        <ControlledSelect
+          name='idClient'
+          control={methods.control}
+          label='Cliente'
+          style={{ marginBottom: '10px' }}
+          items={clientsList}
         />
-        <Select
-          items={handleEquipments()}
-          setItemName={setEquipaments}
-          itemName={equipaments}
-          label="Equipamentos"
-        />
-        <MultipleSelectCheckmarks
-          items={handleServices()}
-          setItemsNames={setServices}
-          itemsNames={services}
-          label="Serviços"
-          disable={!equipaments.length}
-        />
-        <TextField
+
+        <Modal buttonLabel="Escolha dispositivos e serviços" tasks={setTask} />
+
+        {RenderTask()}
+
+        <ControlledTextField
+          name="obs"
           id="outlined-basic"
           label="Observação"
           variant="outlined"
+          control={methods.control}
           multiline
           rows={4}
-          value={observations}
-          onChange={(e) => setObservations(e.target.value)}
         />
+
         <Box textAlign="center">
           <Button
             variant="contained"
@@ -143,7 +118,7 @@ const ServiceOrderRegistrationForm: React.FC<any> = () => {
             Cadastrar
           </Button>
         </Box>
-      </Box>
+      </Form>
     </Box>
   );
 };

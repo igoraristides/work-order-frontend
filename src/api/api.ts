@@ -1,6 +1,9 @@
 import { FromIntervalDto, ByDeviceDto } from './dtos/GraphsDTOs';
 import axios, { AxiosPromise } from "axios";
 import { ChangeStatus } from "./dtos/updateStatus";
+import { ClientResponseDto } from './dtos/ClientDto';
+import { EquipamentResponseDto } from './dtos/EquipamentDto';
+import { ServiceResponseDto } from './dtos/ServiceDto';
 
 export const api = axios.create({
   baseURL: "https://workorder.jesuisjedi.com",
@@ -15,11 +18,11 @@ export function NewClient(newClientDTO: any): AxiosPromise<any> {
   return api.post("client", newClientDTO);
 }
 
-export function Equipaments(): AxiosPromise<any> {
+export function Equipaments(): AxiosPromise<EquipamentResponseDto[]> {
   return api.get("devices");
 }
 
-export function Clients(): AxiosPromise<any> {
+export function Clients(): AxiosPromise<ClientResponseDto[]> {
   return api.get("clients");
 }
 
@@ -27,7 +30,7 @@ export function NewService(newServiceDTO: any): AxiosPromise<any> {
   return api.post("service", newServiceDTO);
 }
 
-export function Services(): AxiosPromise<any> {
+export function Services(): AxiosPromise<ServiceResponseDto[]> {
   return api.get("services");
 }
 
