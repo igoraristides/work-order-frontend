@@ -7,6 +7,7 @@ import {
   ListItemText,
   Select as MuiSelect,
   SelectChangeEvent,
+  SelectProps
 } from "@mui/material";
 
 export interface Props {
@@ -21,7 +22,7 @@ export interface keyValueSelect {
   value: string;
 }
 
-const Select: React.FC<Props> = (props) => {
+const Select: React.FC<Props & SelectProps> = (props) => {
   const { items, itemName, setItemName, label } = props;
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -30,7 +31,7 @@ const Select: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: "100%" }}>
+      <FormControl sx={{ width: "100%", marginBottom: "8px" }}>
         <InputLabel id="select-client-label">{label}</InputLabel>
         <MuiSelect
           labelId="select-client-label"

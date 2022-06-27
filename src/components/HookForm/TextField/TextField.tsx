@@ -4,14 +4,14 @@ import { TextField, TextFieldProps } from "@mui/material";
 import * as React from "react";
 import { HookFormProps } from "../../../hooks/UseHookForm/HookFormProps";
 // @ts-ignore
-import MaskedInput from 'react-text-mask';
+import InputMask from "react-input-mask";
 
 
 export const ControlledTextField: FC<HookFormProps & TextFieldProps> = (
   props
 ) => {
 
-    return (
+  return (
     <Controller
       name={props.name}
       control={props.control}
@@ -23,26 +23,29 @@ export const ControlledTextField: FC<HookFormProps & TextFieldProps> = (
 
       }) => (
 
-          props.mask?
-                  <MaskedInput
-                      {...props}
-                      render={(ref: React.Ref<any> | undefined, _props: JSX.IntrinsicAttributes & TextFieldProps) => (
-                      <TextField
-                          inputRef={ref}
-                          {..._props}
-                      />
-                  )}/>
-              :
+        props.mask ?
+          <InputMask
+
+            mask={props.mask}
+            value={value}
+            disabled={props.disabled}
+            maskChar={props.maskChar}
+            onChange={onChange}
+          >
+            {() => <TextField {...props} />}
+          </InputMask>
+
+          :
           <TextField
-          {...props}
-          helperText={error ? error.message : null}
-          onChange={onChange}
-          error={!!error}
-          value={value}
-          onBlur={onBlur}
-          name={fieldName}
-          defaultValue={undefined}
-        />
+            {...props}
+            helperText={error ? error.message : null}
+            onChange={onChange}
+            error={!!error}
+            value={value}
+            onBlur={onBlur}
+            name={fieldName}
+            defaultValue={undefined}
+          />
       )}
     />
   );

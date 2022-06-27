@@ -42,7 +42,7 @@ const MultipleSelectCheckmarks: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: "100%" }}>
+      <FormControl sx={{ width: "100%", marginBottom: "8px" }}>
         <InputLabel id="demo-multiple-checkbox-label">{label}</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"

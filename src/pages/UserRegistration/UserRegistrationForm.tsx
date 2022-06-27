@@ -7,7 +7,8 @@ import { userRegistrationSchema } from "./UserRegistration.schema";
 import Form from "../../components/HookForm/Form/Form";
 import { NewClient } from "../../api/api";
 import { toast } from "react-toastify";
-import FormUtils from "../../components/HookForm/formUtils/FormUtils";
+import { FormUtils } from "../../components/HookForm/formUtils/FormUtils";
+
 
 const UserRegistrationForm: React.FC<any> = () => {
   const initialValues: UserRegistration = {
@@ -61,21 +62,24 @@ const UserRegistrationForm: React.FC<any> = () => {
             control={methods.control}
             label="CPF"
             style={{ marginBottom: "10px" }}
-            mask={FormUtils.cpfMask}
+            mask={FormUtils.cpfMask.mask}
+            maskChar={FormUtils.cpfMask.maskChar}
           />
           <ControlledTextField
             name="telephone"
             control={methods.control}
             label="Telefone"
             style={{ marginBottom: "10px" }}
-            mask={FormUtils.phoneMask}
+            mask={FormUtils.phoneMask.mask}
+            maskChar={FormUtils.phoneMask.maskChar}
           />
           <ControlledTextField
             name="cellphone"
             control={methods.control}
             label="Celular"
             style={{ marginBottom: "10px" }}
-            mask={FormUtils.cellPhoneMask}
+            mask={FormUtils.cellPhoneMask.mask}
+            maskChar={FormUtils.cellPhoneMask.maskChar}
           />
           <ControlledTextField
             name="email"

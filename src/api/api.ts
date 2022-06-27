@@ -1,8 +1,9 @@
+import { FromIntervalDto, ByDeviceDto } from './dtos/GraphsDTOs';
 import axios, { AxiosPromise } from "axios";
 import { ChangeStatus } from "./dtos/updateStatus";
 
 export const api = axios.create({
-  baseURL: "http://workorder.jesuisjedi.com",
+  baseURL: "https://workorder.jesuisjedi.com",
   withCredentials: false,
 });
 
@@ -42,3 +43,26 @@ export function UpdateStatus(ChangeStatus: ChangeStatus): AxiosPromise<any> {
   return api.patch("work-order", ChangeStatus);
 }
 
+export function GetGraphFromInterval(FromIntervalDto: any): AxiosPromise<any> {
+  return api.post("work-orders/from-interval", FromIntervalDto);
+}
+
+export function GetGraphByDevice(ByDeviceDto: any): AxiosPromise<any> {
+  return api.post("services/by-device", ByDeviceDto);
+}
+
+export function GetGraphByRevenue(ByRevenue: any): AxiosPromise<any> {
+  return api.post("services/by-revenue", ByRevenue);
+}
+
+export function GetBrands(): AxiosPromise<string[]> {
+  return api.get("/device/brands");
+}
+
+export function GetModels(brand: string): AxiosPromise<string[]> {
+  return api.get("/device/models", {
+    params: {
+      brand: brand
+    }
+  });
+}

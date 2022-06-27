@@ -9,6 +9,9 @@ import {
   MdMiscellaneousServices,
   MdOutlineHomeRepairService,
 } from "react-icons/md";
+
+import { GoGraph } from "react-icons/go";
+
 import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 
@@ -16,7 +19,7 @@ import "../../styles/custom.scss";
 
 import logo from "../../assets/logo.png";
 
-interface Props {}
+interface Props { }
 
 const Layout: React.FC<Props> = () => {
   return (
@@ -71,6 +74,11 @@ const Layout: React.FC<Props> = () => {
                 <MenuItem icon={<MdMiscellaneousServices />}>
                   <Link to="/newServiceOrder" />
                   Cadastrar Ordem de Serviço
+                </MenuItem>
+
+                <MenuItem icon={<GoGraph />}>
+                  <Link to="/graphs" />
+                  Gerar Gráficos
                 </MenuItem>
               </Menu>
             </ProSidebar>

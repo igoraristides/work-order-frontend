@@ -43,7 +43,7 @@ const ServiceOrderRegistrationForm: React.FC<any> = () => {
       setEquipamentsList(responseEquipaments.data);
 
       setServicesList(responseServices.data);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   React.useEffect(() => {
@@ -100,7 +100,7 @@ const ServiceOrderRegistrationForm: React.FC<any> = () => {
       <Box
         component="form"
         sx={{
-          "& .MuiTextField-root": { m: 1, width: "100%" },
+          "& .MuiTextField-root": { width: "100%" },
         }}
         autoComplete="off"
         onSubmit={handleSubmit}
