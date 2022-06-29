@@ -8,6 +8,8 @@ import {
   MdDashboard,
   MdMiscellaneousServices,
   MdOutlineHomeRepairService,
+  MdOutlineQueryStats,
+  MdShowChart
 } from "react-icons/md";
 
 import { GoGraph } from "react-icons/go";
@@ -79,6 +81,16 @@ const Layout: React.FC<Props> = () => {
                 <MenuItem icon={<GoGraph />}>
                   <Link to="/graphs" />
                   Gerar Gráficos
+                </MenuItem>
+
+                <MenuItem icon={<MdOutlineQueryStats />}>
+                  <Link to="/statis" />
+                  Visiualizar estatísticas
+                </MenuItem>
+
+                <MenuItem icon={<MdShowChart />}>
+                  <Link to="/predic" />
+                  Previsão de Atendimentos
                 </MenuItem>
               </Menu>
             </ProSidebar>

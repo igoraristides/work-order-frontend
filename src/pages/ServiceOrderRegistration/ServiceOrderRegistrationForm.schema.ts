@@ -7,11 +7,6 @@ export const ServiceRegistrationFormSchema = (): Yup.SchemaOf<ServiceOrderRegist
         idClient: Yup
             .string()
             .required("Campo obrigatório"),
-        tasks: Yup
-            .array().of(Yup.object().shape({
-                deviceID: Yup.number(),
-                services: Yup.array().of(Yup.number()),
-            })),
         obs: Yup
             .string()
             .required("Campo obrigatório"),

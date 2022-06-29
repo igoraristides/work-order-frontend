@@ -12,13 +12,14 @@ import { GetFormattedDate } from './Utils'
 
 const ThirdGrapth = (props: any) => {
 
+    const { setData } = props
+
     const FORM_ID = 'Graph3'
 
     const initialValuesThirdGrapth: ByRevenue = {
         startDate: "",
         endDate: "",
     }
-
 
     const HandleSubmit = async (formValues: ByRevenue) => {
 
@@ -31,11 +32,12 @@ const ThirdGrapth = (props: any) => {
 
             const response = await GetGraphByRevenue(requestBody);
             console.log(response);
-            toast.success("Sucesso");
+            setData(response.data);
+            toast.success("Gráfico gerado com sucesso!");
             methods.reset();
 
         } catch {
-            toast.error("Erro");
+            toast.error("Error ao gerar gráfico!");
             methods.reset();
         }
 

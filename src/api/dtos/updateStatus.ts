@@ -3,4 +3,5 @@ export interface ChangeStatus {
     workOrderStatus: {
         id: number
     }
+    finishedAt?: number
 }

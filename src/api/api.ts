@@ -4,6 +4,7 @@ import { ChangeStatus } from "./dtos/updateStatus";
 import { ClientResponseDto } from './dtos/ClientDto';
 import { EquipamentResponseDto } from './dtos/EquipamentDto';
 import { ServiceResponseDto } from './dtos/ServiceDto';
+import { IReport } from '../pages/Statistics/Statistic';
 
 export const api = axios.create({
   baseURL: "https://workorder.jesuisjedi.com",
@@ -68,4 +69,13 @@ export function GetModels(brand: string): AxiosPromise<string[]> {
       brand: brand
     }
   });
+}
+
+
+export function GetReports(data: any): AxiosPromise<IReport> {
+  return api.post("/work-orders/report", data);
+}
+
+export function GetForecast(data: any): AxiosPromise<string[]> {
+  return api.post("/work-orders/forecast", data);
 }

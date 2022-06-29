@@ -1,6 +1,5 @@
 export interface ServiceOrderRegistration {
     idClient: string,
-    tasks?: Array<object>
     obs?: string
 }
 

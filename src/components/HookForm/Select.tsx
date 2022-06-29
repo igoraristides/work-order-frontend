@@ -47,6 +47,7 @@ const ControlledSelect: React.FC<Props & SelectProps & HookFormProps> = (props) 
                         name={fieldName}
                         disabled={props.disabled}
                         required
+                        autoComplete="on"
                     >
                         {props.items.map((obj) => (
                             <MenuItem key={obj.key} value={obj.value}>

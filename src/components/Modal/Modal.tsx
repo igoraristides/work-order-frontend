@@ -1,7 +1,6 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Typography } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import * as React from "react";
 import { Equipaments, Services } from "../../api/api";
-import { Task } from "../../pages/ServiceOrderRegistration/ServiceOrderRegistration.types";
 import MultipleSelectCheckmarks from "../MultipleSelectCheckmarks/MultipleSelectCheckmarks";
 import Select, { keyValueSelect } from "../Select/Select";
 
@@ -10,11 +9,12 @@ import Select, { keyValueSelect } from "../Select/Select";
 export interface Props {
     buttonLabel: string;
     tasks: React.Dispatch<React.SetStateAction<any[]>>;
+    setIsValid: React.Dispatch<React.SetStateAction<boolean | undefined>>;
 }
 
 const Modal: React.FC<Props> = (props) => {
 
-    const { buttonLabel, tasks } = props;
+    const { buttonLabel, tasks, setIsValid } = props;
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -51,14 +51,19 @@ const Modal: React.FC<Props> = (props) => {
         init();
     }, []);
 
+
     const Add = () => {
 
         if (equipament !== "" || service.length !== 0) {
 
-            var services = service.map(e => parseInt(e));
+            var services = service.map(e => {
+                return { id: parseInt(e) }
+            });
+
             var deviceID = parseInt(equipament);
 
             tasks(prevState => [...prevState, { services, deviceID }]);
+            setIsValid(true);
             setEquipament("");
             setService([]);
             init();
@@ -68,7 +73,7 @@ const Modal: React.FC<Props> = (props) => {
 
     return (
         <div style={{ display: "flex", flexDirection: "column", width: "100%", paddingTop: '10px', paddingBottom: '10px' }}>
-            <Button onClick={handleOpen}>{buttonLabel}</Button>
+            <Button onClick={handleOpen} style={{ color: "#036ba2" }}>{buttonLabel}</Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -76,7 +81,7 @@ const Modal: React.FC<Props> = (props) => {
                 aria-describedby="alert-dialog-description"
                 style={{ display: "flex", marginLeft: '780px' }}
             >
-                <DialogTitle id="alert-dialog-title">
+                <DialogTitle id="alert-dialog-title" sx={{ color: "#036ba2" }}>
                     Escolha dispositivos e serviços que deseja incluir na ordem de serviço
                 </DialogTitle>
                 <DialogContent style={{ display: 'flex', flexDirection: 'column' }}>

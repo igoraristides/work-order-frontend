@@ -67,27 +67,29 @@ const Dashboard: React.FC<any> = () => {
 
         try {
           const response = await UpdateStatus(changeStatus);
+
           toast.success("Status da ordem de serviço atualizado com sucesso");
 
         } catch {
-          toast.error("Falha ao cadastrar usuário");
+          toast.error("Falha ao atualizar status da ordem de serviço");
 
         }
-        window.location.reload();
+        setServiceOrders((await ServiceOrder()).data);
         break;
 
       case Status.IN_PROGRESS:
-        changeStatus.workOrderStatus.id = Status.FINALIZED
+        changeStatus.workOrderStatus.id = Status.FINALIZED;
+        changeStatus.finishedAt = (new Date()).getTime();
 
         try {
           const response = await UpdateStatus(changeStatus);
           toast.success("Status da ordem de serviço atualizado com sucesso");
 
         } catch {
-          toast.error("Falha ao cadastrar usuário");
+          toast.error("falha ao atualizar status da ordem de serviço");
 
         }
-        window.location.reload();
+        setServiceOrders((await ServiceOrder()).data);
         break;
 
       default:

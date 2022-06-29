@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import ReactEcharts from "echarts-for-react";
+import ReactEcharts, { EChartsReactProps } from "echarts-for-react";
 import * as React from "react";
 import Select from "../../components/Select/Select";
 import FirstGrapth from "./Forms/FirstGraph";
@@ -47,6 +47,10 @@ const GraphForm: React.FC<any> = () => {
     React.useEffect(() => {
         GetTotalOrderByInterval();
     }, [serie]);
+
+    React.useEffect(() => {
+        GetServiceRevenue();
+    }, [serie3]);
 
     React.useEffect(() => {
         setSerie([]);
@@ -112,14 +116,16 @@ const GraphForm: React.FC<any> = () => {
                     <div style={{ width: '100%' }}>
                         <ThirdGrapth setData={setSerie3} />
 
-                        {/* <ReactEcharts
-                            style={{
-                                height: "400px",
-                                width: "100%",
-                                marginBottom: "50px",
-                            }}
-                            option={serie3}
-                        /> */}
+                        {serie3.length > 0 &&
+                            <ReactEcharts
+                                style={{
+                                    height: "400px",
+                                    width: "100%",
+                                    marginBottom: "50px",
+                                }}
+                                option={data}
+                            />
+                        }
                     </div>
                 );
 
@@ -166,20 +172,23 @@ const GraphForm: React.FC<any> = () => {
             grid: {
                 left: "3%",
                 right: "4%",
-                bottom: "3%",
+                bottom: "10%",
                 containLabel: true,
             },
             xAxis: {
                 type: "category",
                 data: out.labels,
                 show: true,
+                axisLabel: {
+                    color: "gray",
+                    rotate: 30
+                },
 
             },
             yAxis: {
                 type: "value",
                 axisLabel: {
                     color: "gray",
-                    inside: true,
                 },
             },
             series: [
@@ -187,7 +196,7 @@ const GraphForm: React.FC<any> = () => {
                     type: "bar",
                     data: out.series,
                     symbol: "none",
-                    color: "#f7d917",
+                    color: "#6BC5C2",
                 }
             ],
         };
@@ -208,9 +217,6 @@ const GraphForm: React.FC<any> = () => {
                         backgroundColor: "#6a7985",
                     },
                 },
-            },
-            legend: {
-                data: out.labels
             },
             dataZoom: [
                 {
@@ -236,20 +242,23 @@ const GraphForm: React.FC<any> = () => {
             grid: {
                 left: "3%",
                 right: "4%",
-                bottom: "3%",
+                bottom: "10%",
                 containLabel: true,
             },
             xAxis: {
                 type: "category",
                 data: out.labels,
                 show: true,
+                axisLabel: {
+                    color: "gray",
+                    rotate: 30
+                },
 
             },
             yAxis: {
                 type: "value",
                 axisLabel: {
                     color: "gray",
-                    inside: true,
                 },
             },
             series: [
@@ -257,7 +266,84 @@ const GraphForm: React.FC<any> = () => {
                     type: "bar",
                     data: out.series,
                     symbol: "none",
-                    color: "#f7d917",
+                    color: "#6BC5C2",
+                }
+            ],
+        };
+        setData(dataForChart);
+    }
+
+    const GetServiceRevenue = () => {
+        let out = {
+            labels: serie3.map((item: any) => item.service_description),
+            series: serie3.map((item: any) => item.service_revenue),
+        }
+
+        const dataForChart = {
+            tooltip: {
+                trigger: "axis",
+                axisPointer: {
+                    label: {
+                        backgroundColor: "#6a7985",
+
+                    },
+                },
+            },
+            legend: {
+                display: false,
+                responsive: false
+            },
+            dataZoom: [
+                {
+                    type: "slider",
+                    height: 8,
+                    bottom: 20,
+                    borderColor: "transparent",
+                    backgroundColor: "#e2e2e2",
+                    handleIcon:
+                        "M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7v-1.2h6.6z M13.3,22H6.7v-1.2h6.6z M13.3,19.6H6.7v-1.2h6.6z", // jshint ignore:line
+                    handleSize: 20,
+                    handleStyle: {
+                        shadowBlur: 6,
+                        shadowOffsetX: 1,
+                        shadowOffsetY: 2,
+                        shadowColor: "#aaa",
+                    },
+                },
+                {
+                    type: "inside",
+                },
+            ],
+            grid: {
+
+                left: "3%",
+                right: "4%",
+                bottom: "10%",
+                containLabel: true,
+
+            },
+            xAxis: {
+                type: "category",
+                data: out.labels,
+                show: true,
+                axisLabel: {
+                    color: "gray",
+                    rotate: 30
+                },
+
+            },
+            yAxis: {
+                type: "value",
+                axisLabel: {
+                    color: "gray",
+                },
+            },
+            series: [
+                {
+                    type: "bar",
+                    data: out.series,
+                    symbol: "none",
+                    color: "#6BC5C2",
                 }
             ],
         };
